@@ -1,0 +1,22 @@
+.table{
+    /* display: grid; */
+    display: inline grid;
+    grid-template-rows: 50px ;
+    grid-template-columns: 25vw 25vw 25vw;
+    column-gap: 2px;
+    
+    background-color: rgb(194, 194, 150);
+    justify-content: center;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    
+    
+
+
+    
+}
+.grid-item{
+    
+    margin-bottom: 4px;
+    margin-top:px;
+}
