@@ -1,50 +1,23 @@
-import { useState,useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+
 
 
 function App() {
-  const [info, setInfo] = useState([])
-  const [info2, setInfo2] = useState([])
+  const navigate   = useNavigate();
 
-
-  useEffect( () => {
-    const fetchData = (async ()=>{
-
-    
-  let url = "https://isro.vercel.app/api/centres"
-  let data  = await  fetch(url);
-  let parseddata = await data.json()
-  // console.log(parseddata)
-  setInfo(parseddata.centres)
-})
-fetchData();
-
+  const tour = (e)=>{
+     let item = e.target.value;
+    if(item === "centres"){
+navigate('/centres');
+    } else if (item === "spacecrafts"){
+      navigate('/spacecraft')
+    }else if (item === "satellites" ){
+      navigate('/satellites')
+    }
+  }
   
-  },[])
   
-
-  useEffect(() => {
-
-    const fetchSpacecraft =  (async()=>{
-
-    
-    let url = 'https://isro.vercel.app/api/spacecrafts'
-    let data = await fetch(url);
-     let parseddata2 = await data.json()
-     console.log(parseddata2)
-     setInfo2(parseddata2.spacecrafts)
-
-  })
-  fetchSpacecraft();
-
-  
-
-   
-  
-   
-  }, [])
   
 
   return (
@@ -79,19 +52,19 @@ fetchData();
    
 
       <div className="select w-[20vw] lg:hidden">
-        <select className='w-20'>
-          <option  className='text-bold font-serif bg-pink-400'>Choose </option>
-          <option>Centres</option>
-          <option>spacecrafts</option>
-          <option></option>
+        <select onChange={tour} className='w-20'>
+          <option value=''  className='text-bold font-serif bg-pink-400'>Choose </option>
+          <option value='centres' >Centres</option>
+          <option value='spacecrafts'>Spacecrafts</option>
+          <option value='satellites'>Satellites</option>
         </select>
         </div>
 
         <div className="sidenav hidden lg:block">
-          <ul className='flex'>
-            <li className=''>Spacecraft</li>
-            <li className=''>Spacecraft</li>
-            <li className=''>Spacecraft</li>
+          <ul className='flex gap-16 font-bold text-white  '>
+            <NavLink className={({isActive})=>`${isActive ?  "border-white border-2 p-1 text-gray-800 bg-red-500 transition-all duration-400 "  : ""}`}  to='/spacecraft'><li className=''>Spacecrafts</li></NavLink>
+            <NavLink className={({isActive})=>`${isActive ?  "border-white border-2 p-1 text-gray-800 bg-red-500 transition-all duration-400"  : ""}`} to='/centres'><li className=''>Centres</li></NavLink>
+            <NavLink className={({isActive})=>`${isActive ? "border-white border-2 p-1 text-gray-800 bg-red-500 transition-all duration-400" : ""}`} to='/satellites'><li className=''>Satellites</li></NavLink>
           </ul>
         </div>
 
@@ -99,37 +72,11 @@ fetchData();
       </div>
 
 
-    
+    <Outlet/>
       
-      <div className="container flex justify-center bg-[#fffacd] w-[100vw]">
-        <div className="x  ">
-      {
-          info.map((element)=>{
-            return <div className="element" key={element.id}>
-        <div className="table   w-[80vw] p-1 ">
-          <div className="container grid-item bg-blue-400 rounded-xl h-12 p-3 text-center overflow-y-auto text-[0.6rem] lg:text-[0.8rem]">{element.name}</div>
-          <div className="container2 grid-item bg-orange-400 h-12 rounded-xl p-3 text-center">{element.Place}</div>
-          <div className="container3 grid-item bg-pink-400 h-12 rounded-xl p-3 text-center">{element.State}</div>
-        </div>
-        </div>
-          })
-        }
-       
-              
-              
-       </div>  
-            
-      </div>
+      
 
-      <div className="container2">
-
-        {info2.map((element)=>{
-          return <div className="element" key={element.id}>
-            {element.name}
-          </div>
-        })}
-
-      </div>
+     
     </>
   )
 }
