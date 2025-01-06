@@ -55,7 +55,7 @@ function Centres(){
           <div className="container hero grid-item bg-blue-400 rounded-xl h-12 p-3 text-center 
            text-[0.6rem] lg:text-[0.8rem] overflow-auto ">{element.name}</div>
           <div className="container2 grid-item bg-orange-400 h-12 rounded-xl p-3 text-center">{element.Place}</div>
-          <div className="container3 grid-item bg-pink-400 h-12 rounded-xl p-3 text-center">{element.State}</div>
+          <div className="container3 grid-item bg-pink-400 h-12 rounded-xl p-3 text-center text-[0.8rem] ">{element.State}</div>
         </div>
         </div>
           })
